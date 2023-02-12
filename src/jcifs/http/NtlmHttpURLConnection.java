@@ -30,6 +30,7 @@ import java.net.PasswordAuthentication;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 
 import java.security.Permission;
 
@@ -536,7 +537,7 @@ public class NtlmHttpURLConnection extends HttpURLConnection {
             String password = Type3Message.getDefaultPassword();
             String userInfo = url.getUserInfo();
             if (userInfo != null) {
-                userInfo = URLDecoder.decode(userInfo);
+                userInfo = URLDecoder.decode(userInfo, Charset.defaultCharset());
                 int index = userInfo.indexOf(':');
                 user = (index != -1) ? userInfo.substring(0, index) : userInfo;
                 if (index != -1) password = userInfo.substring(index + 1);
